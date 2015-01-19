@@ -46,7 +46,7 @@ def get_days(start, end):
 def process_str(raw_str):
     if raw_str is None:
         return raw_str
-    return raw_str.replace('\n','').replace('&nbsp;','')
+    return raw_str.replace('\n','').replace('&nbsp;','').strip()
 
 
 if __name__ == '__main__':
