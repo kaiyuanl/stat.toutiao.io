@@ -27,6 +27,9 @@ def test_url_valid(url):
 
 
 def gen_redir_url(url):
+    if url is None:
+        return url
+        
     req = urllib2.Request(url)
     opr = urllib2.build_opener()
     f = opr.open(req)
@@ -39,6 +42,11 @@ def get_days(start, end):
     diff = end - start
     for i in range(diff.days + 1):
         yield start + datetime.timedelta(i)
+
+def process_str(raw_str):
+    if raw_str is None:
+        return raw_str
+    return raw_str.replace('\n','').replace('&nbsp;','')
 
 
 if __name__ == '__main__':

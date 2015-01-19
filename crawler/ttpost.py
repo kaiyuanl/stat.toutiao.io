@@ -1,18 +1,38 @@
 class Post:
     def __init__(self,
         head, link,
-        author, author_link,
-        submitter, submittor_link,
+        site,
+        by, by_link,
+        fromm, fromm_link,
         pub_date):
 
         self.head = head
         self.link = link
-        self.author = author
-        self.author_link = author_link
-        self.submitter = submitter
-        self.submitter_link = submitter_link
+        self.site = site
+        self.by = by
+        self.by_link = link
+        self.fromm = fromm
+        self.fromm_link = fromm_link
         self.pub_date = pub_date
 
 
     def __str__(self):
-        pass
+        return \
+'''
+head:{}
+link:{}
+site:{}
+by:{}
+by_link:{}
+from:{}
+from_link:{}
+pub_date:{}
+'''.format(
+    self.head,
+    self.link,
+    self.site,
+    self.by,
+    self.by_link,
+    self.fromm,
+    self.fromm_link,
+    self.pub_date)

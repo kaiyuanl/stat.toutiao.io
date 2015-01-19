@@ -35,10 +35,10 @@ class MySqlConn:
             dt = datetime.datetime.strptime(result_str, '%Y-%m-%d')
             return datetime.date(dt.year, dt.month, dt.day)
 
-    def add_post(self, head, link, author, author_link,
-        submitter, submitter_link, pub_date):
-        args = (head, link, author, author_link,
-            submitter, submitter_link, pub_date)
+    def add_post(self, head, link, site, by, by_link,
+        fromm, fromm_link, pub_date):
+        args = (head, link, site, by, by_link,
+            fromm, fromm_link, pub_date)
         try:
             result = self.cursor.callproc('AddPost', args)
         except mysql.connector.Error as err:
@@ -59,6 +59,6 @@ def get_last_date():
     return conn.get_last_date()
 
 def add_post(new_post):
-    conn.add_post(new_post.head, new_post.link, new_post.author,
-        new_post.author_link, new_post.submitter, new_post.submitter_link)
+    conn.add_post(new_post.head, new_post.link, new_post.site, new_post.by,
+        new_post.by_link, new_post.fromm, new_post.fromm_link, new_post.pub_date)
 
