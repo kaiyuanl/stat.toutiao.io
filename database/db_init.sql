@@ -1,3 +1,5 @@
+drop database if exists toutiao;
+
 create database if not exists toutiao;
 use toutiao;
 
@@ -21,9 +23,10 @@ delimiter $$
 create procedure GetLastDate(out _Pub_Date date)
 begin
     select Max(Pub_Date) into _Pub_Date
-    from toutiao.Pub_Date;
+    from toutiao.Post;
 end$$
-delimiter;
+delimiter ;
+
 
 drop procedure if exists AddPost;
 delimiter $$
@@ -44,4 +47,4 @@ begin
         Submitter_Link,
         Pub_Date);
 end$$
-delimiter;
+delimiter ;
