@@ -10,10 +10,10 @@ create table Post
     Id int not null auto_increment,
     Head varchar(300) not null,
     Link varchar(500) not null,
-    Author varchar(300) null,
-    Author_Link varchar(500) null,
-    Submitter varchar(300) null,
-    Submitter_Link varchar(500) null,
+    By varchar(300) null,
+    By_Link varchar(500) null,
+    Fromm varchar(300) null,
+    Fromm_Link varchar(500) null,
     Pub_Date date not null,
     primary key(Id)
 );
@@ -32,19 +32,19 @@ drop procedure if exists AddPost;
 delimiter $$
 create procedure AddPost(in Head varchar(300),
     in Link varchar(500),
-    in Author varchar(300),
-    in Author_Link varchar(500),
-    in Submitter varchar(300),
-    in Submitter_Link varchar(500),
+    in By varchar(300),
+    in By_Link varchar(500),
+    in Fromm varchar(300),
+    in Fromm_Link varchar(500),
     in Pub_Date date
     )
 begin
     insert into toutiao.Post value(Head,
         Link,
-        Author,
-        Author_Link,
-        Submitter,
-        Submitter_Link,
+        By,
+        By_Link,
+        Fromm,
+        Fromm_Link,
         Pub_Date);
 end$$
 delimiter ;
