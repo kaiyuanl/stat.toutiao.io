@@ -10,6 +10,7 @@ create table Post
     Id int not null auto_increment,
     Head varchar(300) not null,
     Link varchar(500) not null,
+    Site varchar(300) null,
     By varchar(300) null,
     By_Link varchar(500) null,
     Fromm varchar(300) null,
@@ -32,6 +33,7 @@ drop procedure if exists AddPost;
 delimiter $$
 create procedure AddPost(in Head varchar(300),
     in Link varchar(500),
+    in Site varchar(300),
     in By varchar(300),
     in By_Link varchar(500),
     in Fromm varchar(300),
@@ -41,6 +43,7 @@ create procedure AddPost(in Head varchar(300),
 begin
     insert into toutiao.Post value(Head,
         Link,
+        Site,
         By,
         By_Link,
         Fromm,
