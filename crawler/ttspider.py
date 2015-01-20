@@ -66,12 +66,12 @@ class PostSpider:
                 else:
                     fromm = raw_from
 
-                new_post = ttpost.Post(head, link, 
-                    ttinfra.process_str(site), 
-                    ttinfra.process_str(by), 
+                new_post = ttpost.Post(head, link,
+                    ttinfra.process_str(site),
+                    ttinfra.process_str(by),
                     ttinfra.process_str(by_link),
-                    ttinfra.process_str(fromm), 
-                    ttinfra.process_str(fromm_link), 
+                    ttinfra.process_str(fromm),
+                    ttinfra.process_str(fromm_link),
                     self.pub_date)
                 self.posts.append(new_post)
 
@@ -87,12 +87,12 @@ class PostSpider:
                     by_link = match.group(1)
                 else:
                     by = raw_by
-                new_post = ttpost.Post(head, link, 
-                    ttinfra.process_str(site), 
-                    ttinfra.process_str(by), 
+                new_post = ttpost.Post(head, link,
+                    ttinfra.process_str(site),
+                    ttinfra.process_str(by),
                     ttinfra.process_str(by_link),
-                    ttinfra.process_str(fromm), 
-                    ttinfra.process_str(fromm_link), 
+                    ttinfra.process_str(fromm),
+                    ttinfra.process_str(fromm_link),
                     self.pub_date)
                 self.posts.append(new_post)
 
@@ -108,12 +108,12 @@ class PostSpider:
                     fromm_link = match.group(1)
                 else:
                     by = raw_by
-                new_post = ttpost.Post(head, link, 
-                    ttinfra.process_str(site), 
-                    ttinfra.process_str(by), 
+                new_post = ttpost.Post(head, link,
+                    ttinfra.process_str(site),
+                    ttinfra.process_str(by),
                     ttinfra.process_str(by_link),
-                    ttinfra.process_str(fromm), 
-                    ttinfra.process_str(fromm_link), 
+                    ttinfra.process_str(fromm),
+                    ttinfra.process_str(fromm_link),
                     self.pub_date)
                 self.posts.append(new_post)
 
@@ -122,12 +122,12 @@ class PostSpider:
             match = self._re_site.search(desc)
             if match is not None:
                 site = match.group(1)
-                new_post = ttpost.Post(head, link, 
-                    ttinfra.process_str(site), 
-                    ttinfra.process_str(by), 
+                new_post = ttpost.Post(head, link,
+                    ttinfra.process_str(site),
+                    ttinfra.process_str(by),
                     ttinfra.process_str(by_link),
-                    ttinfra.process_str(fromm), 
-                    ttinfra.process_str(fromm_link), 
+                    ttinfra.process_str(fromm),
+                    ttinfra.process_str(fromm_link),
                     self.pub_date)
                 self.posts.append(new_post)
 
@@ -144,11 +144,12 @@ class PostSpider:
 
 
 
-
+#test code
 if __name__ == '__main__':
-    test_date = datetime.date(2014, 12, 12)
-    spider = PostSpider(test_date, ttinfra.gen_prev_url(2014, 12, 12))
+    test_date = datetime.date(2014, 10, 10)
+    spider = PostSpider(test_date, ttinfra.gen_prev_url(2014, 10, 10))
     posts = spider.content()
     for post in posts:
         print '-'*10
         print post
+        ttinfra.logger.info(post.head)

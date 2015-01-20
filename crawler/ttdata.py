@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import errorcode
 import ConfigParser
 import ttpost
+import ttinfra
 import datetime
 
 class MySqlConn:
@@ -17,13 +18,13 @@ class MySqlConn:
             self.cursor = self.conn.cursor()
 
         except mysql.connector.Error as err:
-            print err
+            ttinfra.logger.exception(err)
 
     def __del__(self):
         try:
             self.conn.close()
         except mysql.connector.Error as err:
-            print err
+            ttinfra.logger.exception(err)
 
     def get_last_date(self):
         args = (0, )
@@ -42,7 +43,7 @@ class MySqlConn:
         try:
             result = self.cursor.callproc('AddPost', args)
         except mysql.connector.Error as err:
-            print err
+            ttinfra.logger.exception(err)
 
 
 config = ConfigParser.ConfigParser(allow_no_value = True)
@@ -59,6 +60,7 @@ def get_last_date():
     return conn.get_last_date()
 
 def add_post(new_post):
+    ttinfra.logger.info(new_post)
     conn.add_post(new_post.head, new_post.link, new_post.site, new_post.by,
         new_post.by_link, new_post.fromm, new_post.fromm_link, new_post.pub_date)
 

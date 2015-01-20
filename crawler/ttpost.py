@@ -19,14 +19,9 @@ class Post:
     def __str__(self):
         return \
 '''
-head:{}
-link:{}
-site:{}
-by:{}
-by_link:{}
-from:{}
-from_link:{}
-pub_date:{}
+{} <{}>
+{} by {} <{}> from {} <{}>
+{}
 '''.format(
     self.head,
     self.link,
