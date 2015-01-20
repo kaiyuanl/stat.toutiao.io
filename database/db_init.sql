@@ -11,8 +11,8 @@ create table Post
     Head varchar(300) not null,
     Link varchar(500) not null,
     Site varchar(300) null,
-    By varchar(300) null,
-    By_Link varchar(500) null,
+    Byy varchar(300) null,
+    Byy_Link varchar(500) null,
     Fromm varchar(300) null,
     Fromm_Link varchar(500) null,
     Pub_Date date not null,
@@ -34,18 +34,27 @@ delimiter $$
 create procedure AddPost(in Head varchar(300),
     in Link varchar(500),
     in Site varchar(300),
-    in By varchar(300),
-    in By_Link varchar(500),
+    in Byy varchar(300),
+    in Byy_Link varchar(500),
     in Fromm varchar(300),
     in Fromm_Link varchar(500),
     in Pub_Date date
     )
 begin
-    insert into toutiao.Post value(Head,
+    insert into toutiao.Post (Head,
         Link,
         Site,
-        By,
-        By_Link,
+        Byy,
+        Byy_Link,
+        Fromm,
+        Fromm_Link,
+        Pub_Date)
+
+        values (Head,
+        Link,
+        Site,
+        Byy,
+        Byy_Link,
         Fromm,
         Fromm_Link,
         Pub_Date);
