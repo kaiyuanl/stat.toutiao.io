@@ -18,13 +18,13 @@ for d in period:
     ttprev_url = ttinfra.gen_prev_url(year, month, day)
     ttinfra.logger.info('date:{}\turl:{}'.format(d, ttprev_url))
     if ttinfra.test_url_valid(ttprev_url):
-        ttinfra.logger.info('url is valid. spider start for {}'.format(ttprev_url))
+        ttinfra.logger.info('url <{}>is valid. spider start'.format(ttprev_url))
         spider = ttspider.PostSpider(d, ttprev_url)
         posts = spider.content()
         for p in posts:
             ttdata.add_post(p)
     else:
-        ttinfra.logger.waring('url <{}> is not access'.formate(ttprev_url))
+        ttinfra.logger.warning('url <{}> can not be accessed'.format(ttprev_url))
     continue
 
 ttinfra.logger.info('-'*10 + 'crawler finish' + '-'*10)

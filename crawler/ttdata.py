@@ -7,6 +7,7 @@ import datetime
 
 class MySqlConn:
     def __init__(self, user, pwd, host, db):
+        ttinfra.logger.info('initialize connection to mysql')
         try:
             self.conn = mysql.connector.connect(
                 user = user,
@@ -30,7 +31,7 @@ class MySqlConn:
         args = (0, )
         result = self.cursor.callproc('GetLastDate', args)
         if result[0] is None:
-            return datetime.date(2014, 10, 10)
+            return datetime.date(2014, 9, 26)
         else:
             result_str = result[0].encode('ascii', 'replace')
             dt = datetime.datetime.strptime(result_str, '%Y-%m-%d')
@@ -64,3 +65,6 @@ def add_post(new_post):
     conn.add_post(new_post.head, new_post.link, new_post.site, new_post.by,
         new_post.by_link, new_post.fromm, new_post.fromm_link, new_post.pub_date)
 
+
+if __name__ == '__main__':
+    print conn.get_last_date()
