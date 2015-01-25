@@ -6,14 +6,14 @@ use toutiao;
 
 drop table if exists Daily;
 create table Daily
-{
+(
     Pub_Date date not null,
     -- 1 stands for completing retrieving
     -- -n stands for the times of failures of retrieving daily
     Status int not null,
     Raw_Html text null,
-    primary key(Pub_Date)
-};
+    primary key (Pub_Date)
+);
 
 drop table if exists Post;
 create table Post
@@ -27,8 +27,8 @@ create table Post
     Fromm varchar(300) null,
     Fromm_Link varchar(500) null,
     Pub_Date date not null,
-    primary key(Id),
-    foreign key Pub_Date references Daily(Pub_Date)
+    primary key (Id),
+    foreign key (Pub_Date) references Daily(Pub_Date)
 );
 
 
