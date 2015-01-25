@@ -3,8 +3,19 @@ drop database if exists toutiao;
 create database if not exists toutiao;
 use toutiao;
 
-drop table if exists Post;
 
+drop table if exists Daily;
+create table Daily
+{
+    Pub_Date date not null,
+    -- 1 stands for completing retrieving
+    -- -n stands for the times of failures of retrieving daily
+    Status int not null,
+    Raw_Html text null,
+    primary key(Pub_Date)
+};
+
+drop table if exists Post;
 create table Post
 (
     Id int not null auto_increment,
@@ -16,15 +27,17 @@ create table Post
     Fromm varchar(300) null,
     Fromm_Link varchar(500) null,
     Pub_Date date not null,
-    primary key(Id)
+    primary key(Id),
+    foreign key Pub_Date references Daily(Pub_Date)
 );
+
 
 drop procedure if exists GetLastDate;
 delimiter $$
 create procedure GetLastDate(out _Pub_Date date)
 begin
     select Max(Pub_Date) into _Pub_Date
-    from toutiao.Post;
+    from toutiao.Daily;
 end$$
 delimiter ;
 
