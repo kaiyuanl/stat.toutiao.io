@@ -34,8 +34,8 @@ class PostSpider:
         self.posts = []
 
     def content(self):
-        html = ttinfra.get_html_content(self.url)
-        raw_items = self._re_item.findall(html)
+        self.html = ttinfra.get_html_content(self.url)
+        raw_items = self._re_item.findall(self.html)
         for raw_item in raw_items:
             head, link, site, by, by_link, fromm, fromm_link \
              =None, None, None, None, None, None, None
@@ -138,7 +138,7 @@ class PostSpider:
             post.by_link = ttinfra.gen_redir_url(post.by_link)
             post.fromm_link = ttinfra.gen_redir_url(post.fromm_link)
 
-        return self.posts
+        return (self.posts, self.html, self.pub_date)
 
 
 
@@ -148,7 +148,8 @@ class PostSpider:
 if __name__ == '__main__':
     test_date = datetime.date(2014, 10, 10)
     spider = PostSpider(test_date, ttinfra.gen_prev_url(2014, 10, 10))
-    posts = spider.content()
+    (posts, html) = spider.content()
+    print html
     for post in posts:
         print '-'*10
         print post
