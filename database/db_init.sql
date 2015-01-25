@@ -41,6 +41,21 @@ begin
 end$$
 delimiter ;
 
+drop procedure if exists AddDaily;
+delimiter $$
+create procedure AddDaily(in Pub_Date date,
+    in Status int,
+    in Raw_Html text)
+begin
+    insert into toutiao.Daily(Pub_Date,
+        Status,
+        Raw_Html)
+        values(Pub_Date,
+            Status,
+            Raw_Html);
+end$$
+delimiter ;
+
 
 drop procedure if exists AddPost;
 delimiter $$
