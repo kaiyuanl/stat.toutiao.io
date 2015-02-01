@@ -27,6 +27,7 @@ create table Post
     Fromm varchar(300) null,
     Fromm_Link varchar(500) null,
     Pub_Date date not null,
+    Raw_Html text null,
     primary key (Id),
     foreign key (Pub_Date) references Daily(Pub_Date)
 );
@@ -66,7 +67,8 @@ create procedure AddPost(in Head varchar(300),
     in Byy_Link varchar(500),
     in Fromm varchar(300),
     in Fromm_Link varchar(500),
-    in Pub_Date date
+    in Pub_Date date,
+    in Raw_Html text
     )
 begin
     insert into toutiao.Post (Head,
@@ -76,7 +78,8 @@ begin
         Byy_Link,
         Fromm,
         Fromm_Link,
-        Pub_Date)
+        Pub_Date,
+        Raw_Html)
 
         values (Head,
         Link,
@@ -85,6 +88,7 @@ begin
         Byy_Link,
         Fromm,
         Fromm_Link,
-        Pub_Date);
+        Pub_Date,
+        Raw_Html);
 end$$
 delimiter ;
