@@ -39,9 +39,9 @@ class MySqlConn:
             return datetime.date(dt.year, dt.month, dt.day)
 
     def add_post(self, head, link, site, by, by_link,
-        fromm, fromm_link, pub_date):
+        fromm, fromm_link, pub_date, raw_html):
         args = (head, link, site, by, by_link,
-            fromm, fromm_link, pub_date)
+            fromm, fromm_link, pub_date, raw_html)
         try:
             result = self.cursor.callproc('AddPost', args)
         except mysql.connector.Error as err:
@@ -71,7 +71,7 @@ def get_last_date():
 def add_post(new_post):
     ttinfra.logger.info(new_post)
     conn.add_post(new_post.head, new_post.link, new_post.site, new_post.by,
-        new_post.by_link, new_post.fromm, new_post.fromm_link, new_post.pub_date)
+        new_post.by_link, new_post.fromm, new_post.fromm_link, new_post.pub_date, new_post.raw_html)
 
 def add_daily(pub_date, status, html):
     ttinfra.logger.info('add daily at {}, status is {}'.format(pub_date, status))

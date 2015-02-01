@@ -128,7 +128,8 @@ class PostSpider:
                     ttinfra.process_str(by_link),
                     ttinfra.process_str(fromm),
                     ttinfra.process_str(fromm_link),
-                    self.pub_date)
+                    self.pub_date,
+                    raw_item)
                 self.posts.append(new_post)
 
                 continue
@@ -148,8 +149,7 @@ class PostSpider:
 if __name__ == '__main__':
     test_date = datetime.date(2014, 10, 10)
     spider = PostSpider(test_date, ttinfra.gen_prev_url(2014, 10, 10))
-    (posts, html) = spider.content()
-    print html
+    (posts, html, pub_date) = spider.content()
     for post in posts:
         print '-'*10
         print post
