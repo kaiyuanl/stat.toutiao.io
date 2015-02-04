@@ -1,19 +1,33 @@
-from flask import Flask
+from flask import Flask, render_template
+from sttdata import toutiao
+from sttform import SearchForm
 
 app = Flask(__name__)
 
 @app.route('/')
 def Stat():
-	pass
+	return render_template('stt.html')
 
-@app.route('/search')
+@app.route('/search', methods = ['GET', 'POST'])
 def Search():
-	pass
+	form = SearchForm()
+	if form.validate_on_submit():
+		keyword = str(form.search_content.data).encode('utf-8')
+		result = toutiao.search(keyword)
+		return render_template('stt.html', form = form, posts = result)
+
+	
 
 @app.route('/about')
 def About():
-	pass
+	return 'about'
 
 @app.route('/page/<number>')
 def Page(number):
-	pass
+	return 'page'
+
+@app.route('/all')
+def  All():
+	return render_template('stt.html', posts = toutiao.list_post())
+
+app.run(debug=True)

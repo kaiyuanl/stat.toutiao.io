@@ -6,10 +6,11 @@
 	<body>
 		<div>
 			<label>程序员头条搜索</label>
-			<input type="text" name="keyword"/>
-			<input type="button" name="search" value="Search">
+			<form action="" method="post" name="search">
+				{{form.search_content(size=80)}} <input type="submit" value="Search" />
+			</form>
 		</div>
-		<div></div>
+		{% block content %}{% endblock %}
 		<div class="foot"><a href="https://github.com/kaiyuanl/stat.toutiao.io">@kaiyuanl</a></div>
 	</body>
 </html>
