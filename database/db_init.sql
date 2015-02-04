@@ -28,8 +28,17 @@ create table Post
     Fromm_Link varchar(500) null,
     Pub_Date date not null,
     Raw_Html text null,
+    Click int null,
     primary key (Id),
     foreign key (Pub_Date) references Daily(Pub_Date)
+);
+
+drop table if exists Keyword;
+create table Keyword
+(
+    Word text not null,
+    Count int not null,
+    primary key(Word)
 );
 
 
@@ -79,7 +88,8 @@ begin
         Fromm,
         Fromm_Link,
         Pub_Date,
-        Raw_Html)
+        Raw_Html,
+        Click)
 
         values (Head,
         Link,
@@ -89,6 +99,9 @@ begin
         Fromm,
         Fromm_Link,
         Pub_Date,
-        Raw_Html);
+        Raw_Html,
+        0);
 end$$
 delimiter ;
+
+

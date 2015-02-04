@@ -4,7 +4,7 @@ class Post:
         site,
         by, by_link,
         fromm, fromm_link,
-        pub_date
+        pub_date,
         raw_html):
 
         self.head = head

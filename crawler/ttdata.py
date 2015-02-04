@@ -32,7 +32,7 @@ class MySqlConn:
         result = self.cursor.callproc('GetLastDate', args)
         if result[0] is None:
             #return datetime.date(2014, 9, 26)
-            return datetime.date(2015, 1, 23)
+            return datetime.date(2015, 2, 1)
         else:
             result_str = result[0].encode('ascii', 'replace')
             dt = datetime.datetime.strptime(result_str, '%Y-%m-%d')

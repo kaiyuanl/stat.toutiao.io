@@ -72,7 +72,8 @@ class PostSpider:
                     ttinfra.process_str(by_link),
                     ttinfra.process_str(fromm),
                     ttinfra.process_str(fromm_link),
-                    self.pub_date)
+                    self.pub_date,
+                    raw_item)
                 self.posts.append(new_post)
 
                 continue
@@ -93,7 +94,8 @@ class PostSpider:
                     ttinfra.process_str(by_link),
                     ttinfra.process_str(fromm),
                     ttinfra.process_str(fromm_link),
-                    self.pub_date)
+                    self.pub_date,
+                    raw_item)
                 self.posts.append(new_post)
 
                 continue
@@ -114,7 +116,8 @@ class PostSpider:
                     ttinfra.process_str(by_link),
                     ttinfra.process_str(fromm),
                     ttinfra.process_str(fromm_link),
-                    self.pub_date)
+                    self.pub_date,
+                    raw_item)
                 self.posts.append(new_post)
 
                 continue
