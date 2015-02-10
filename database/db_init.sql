@@ -1,107 +1,46 @@
-drop database if exists toutiao;
+DROP DATABASE IF EXISTS toutiao;
 
-create database if not exists toutiao;
-use toutiao;
+CREATE DATABASE IF NOT EXISTS toutiao;
+USE toutiao;
 
 
-drop table if exists Daily;
-create table Daily
+DROP TABLE IF EXISTS Daily;
+CREATE TABLE Daily
 (
-    Pub_Date date not null,
-    -- 1 stands for completing retrieving
-    -- -n stands for the times of failures of retrieving daily
-    Status int not null,
-    Raw_Html text null,
-    primary key (Pub_Date)
+    Pub_Date DATE NOT NULL,
+
+    -- 1 stands for completing crawling for this date
+    -- -n stands for the times of failures of crawling for this date
+    Status INT NOT NULL,
+    Raw_Html TEXT NULL,
+    PRIMARY KEY (Pub_Date)
 );
 
-drop table if exists Post;
-create table Post
+DROP TABLE IF EXISTS Post;
+CREATE TABLE Post
 (
-    Id int not null auto_increment,
-    Head varchar(300) not null,
-    Link varchar(500) not null,
-    Site varchar(300) null,
-    Byy varchar(300) null,
-    Byy_Link varchar(500) null,
-    Fromm varchar(300) null,
-    Fromm_Link varchar(500) null,
-    Pub_Date date not null,
-    Raw_Html text null,
-    Click int null,
-    primary key (Id),
-    foreign key (Pub_Date) references Daily(Pub_Date)
+    Id INT NOT NULL AUTO_INCREMENT,
+    Head VARCHAR(300) NOT NULL,
+    Link VARCHAR(500) NOT NULL,
+    Site VARCHAR(300) NULL,
+    Byy VARCHAR(300) NULL,
+    Byy_Link VARCHAR(500) NULL,
+    Fromm VARCHAR(300) NULL,
+    Fromm_Link VARCHAR(500) NULL,
+    Pub_Date DATE NOT NULL,
+    Raw_Html TEXT NULL,
+    Click INT NULL,
+    PRIMARY KEY (Id),
+    FOREIGN KEY (Pub_Date) REFERENCES Daily(Pub_Date)
 );
 
-drop table if exists Keyword;
-create table Keyword
+DROP TABLE IF EXISTS Keyword;
+CREATE TABLE Keyword
 (
-    Word text not null,
-    Count int not null,
-    primary key(Word)
+    Id INT NOT NULL AUTO_INCREMENT,
+    Word TEXT NOT NULL,
+    Count INT NOT NULL,
+    PRIMARY key(Id)
 );
-
-
-drop procedure if exists GetLastDate;
-delimiter $$
-create procedure GetLastDate(out _Pub_Date date)
-begin
-    select Max(Pub_Date) into _Pub_Date
-    from toutiao.Daily;
-end$$
-delimiter ;
-
-drop procedure if exists AddDaily;
-delimiter $$
-create procedure AddDaily(in Pub_Date date,
-    in Status int,
-    in Raw_Html text)
-begin
-    insert into toutiao.Daily(Pub_Date,
-        Status,
-        Raw_Html)
-        values(Pub_Date,
-            Status,
-            Raw_Html);
-end$$
-delimiter ;
-
-
-drop procedure if exists AddPost;
-delimiter $$
-create procedure AddPost(in Head varchar(300),
-    in Link varchar(500),
-    in Site varchar(300),
-    in Byy varchar(300),
-    in Byy_Link varchar(500),
-    in Fromm varchar(300),
-    in Fromm_Link varchar(500),
-    in Pub_Date date,
-    in Raw_Html text
-    )
-begin
-    insert into toutiao.Post (Head,
-        Link,
-        Site,
-        Byy,
-        Byy_Link,
-        Fromm,
-        Fromm_Link,
-        Pub_Date,
-        Raw_Html,
-        Click)
-
-        values (Head,
-        Link,
-        Site,
-        Byy,
-        Byy_Link,
-        Fromm,
-        Fromm_Link,
-        Pub_Date,
-        Raw_Html,
-        0);
-end$$
-delimiter ;
 
 
