@@ -28,8 +28,8 @@ class Post(object):
     self.Head,
     self.Link,
     self.Site,
-    self.By,
-    self.By_Link,
+    self.Byy,
+    self.Byy_Link,
     self.Fromm,
     self.Fromm_Link,
     self.Pub_Date)

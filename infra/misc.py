@@ -3,6 +3,7 @@ import datetime
 def get_today_date():
     return datetime.date.today()
 
+
 def get_days(start, end):
     start = start + datetime.timedelta(days = 1)
     diff = end - start

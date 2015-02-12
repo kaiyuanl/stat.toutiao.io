@@ -1,16 +1,13 @@
-import config
-import sys
-sys.path.append('..')
-from infra import log
-from spiders import *
+import infra.log
+from infra.spiders import *
 from infra.items import *
 from infra.misc import *
 from infra.data import *
 
-toutiao = Database(config.user, config.password, config.host, config.database)
+
 
 log.info('-'*10 + 'crawler start' + '-'*10)
-last_date = toutiao.get_last_date()
+last_date = get_last_date()
 today_date = get_today_date()
 log.info('last_date:{}\t today_date:{}'.format(last_date, today_date))
 
@@ -25,24 +22,13 @@ for d in period:
     log.info('date:{}\turl:{}'.format(d, ttprev_url))
     if test_url_valid(ttprev_url):
         log.info('url <{}>is valid. spider starts'.format(ttprev_url))
-        spider = PostSpider(d, ttprev_url)
+        spider = ttspider.PostSpider(d, ttprev_url)
         (posts, html, pub_date) = spider.content()
-        daily = Daily(pub_date, 1, html)
-        toutiao.add_daily(daily)
-        toutiao.commit()
-
-        log.info(daily)
-        for post in posts:
-            toutiao.add_post(post)
-            log.info(post)
-
-        toutiao.commit()
-
+        add_daily(pub_date, 1, html)
+        for p in posts:
+            add_post(p)
     else:
         log.warning('url <{}> can not be accessed'.format(ttprev_url))
-        daily = Daily(d, -1, None)
-        toutiao.add_daily(daily)
-        log.info(daily)
-        toutiao.commit()
+        add_daily(d, -1, None)
 
 log.info('-'*10 + 'crawler finishs' + '-'*10)
