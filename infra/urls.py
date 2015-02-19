@@ -2,6 +2,8 @@ import urllib2
 import httplib
 import urlparse
 
+from decorators import Retry
+
 def get_html_content(url):
     response = urllib2.urlopen(url)
     html = response.read()
@@ -25,7 +27,7 @@ def gen_redir_url(url):
     finally:
         return url
 
-
+@Retry(3)
 def test_url_valid(url):
     result = None
     host, path = urlparse.urlparse(url)[1:3]
