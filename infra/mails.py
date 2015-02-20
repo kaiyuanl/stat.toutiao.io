@@ -20,24 +20,3 @@ class Messenger:
 
     def send(self, send, recv, message):
         self.server.sendmail(send, recv, message.as_string())
-
-if __name__ == '__main__':
-    server = 'smtp.tju.edu.cn'
-    port = '25'
-    username = 'kaiyuanl@tju.edu.cn'
-    password = 'T%nt0wn'
-
-    send = 'kaiyuanl@tju.edu.cn'
-    recv = 'kaiyuanl@tju.edu.cn'
-
-    body = '''test is a test mail'''
-
-    message = Message()
-    message['Subject'] = 'test mail'
-    message['From'] = send
-    message['To'] = recv
-    message.add_content(body)
-
-    smtp = Messenger(server, port, username, password)
-
-    smtp.send(send, recv, message)

@@ -29,10 +29,10 @@ class Database:
     def get_last_date(self):
         q = self.session.query(self.daily_table.c.Pub_Date, func.max(self.daily_table.c.Pub_Date)).all()
         print q
-        if q[0][0] is not None:
-            return q[0][0]
+        if q[0][1] is not None:
+            return q[0][1]
         else:
-            return datetime.date(2015, 2, 9)
+            return datetime.date(2014, 9, 26)
 
 
     def add_post(self, post):
@@ -67,15 +67,7 @@ if __name__ == '__main__':
     host = 'localhost'
     db = 'toutiao'
     toutiao = Database(user, pwd, host, db)
-    daily = Daily(get_today_date())
-    #toutiao.add_daily(daily)
-    toutiao.commit()
 
-    ds = toutiao.get_all_dailies()
-    for d in ds:
-        print d
-
-    toutiao.commit()
     print toutiao.get_last_date()
 
 
