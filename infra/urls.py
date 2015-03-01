@@ -35,8 +35,8 @@ def test_url_valid(url):
         httpconn = httplib.HTTPConnection(host)
         httpconn.request('HEAD', path)
         result = httpconn.getresponse().status
-    except StandardError:
-        pass
+    except StandardError as err:
+        print err
 
     good_codes = [httplib.OK, httplib.FOUND, httplib.MOVED_PERMANENTLY]
     return result in good_codes

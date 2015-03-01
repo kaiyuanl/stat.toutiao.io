@@ -5,6 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import *
 from items import Post, Daily
 from misc import get_today_date
+from config import database_config
 
 class Database:
     def __init__(self, user, pwd, host, db):
@@ -28,7 +29,6 @@ class Database:
 
     def get_last_date(self):
         q = self.session.query(self.daily_table.c.Pub_Date, func.max(self.daily_table.c.Pub_Date)).all()
-        print q
         if q[0][1] is not None:
             return q[0][1]
         else:
@@ -60,14 +60,15 @@ class Database:
             print err
 
 
+toutiao = Database(
+    database_config['username'],
+    database_config['password'],
+    database_config['host'],
+    database_config['database']
+    )
+
 #test code
 if __name__ == '__main__':
-    user = 'root'
-    pwd = 'T%nt0wn'
-    host = 'localhost'
-    db = 'toutiao'
-    toutiao = Database(user, pwd, host, db)
-
     print toutiao.get_last_date()
 
 

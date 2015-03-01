@@ -1,4 +1,9 @@
-import os, platform, logging, datetime
+import os
+import platform
+import logging
+import datetime
+
+from mails import need_to_send
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -7,19 +12,24 @@ logging.basicConfig(
     filemode = 'a', #'a' opens the file for appending
 )
 
-logger = logging.getLogger('test_logger')
+xlogger = logging.getLogger('test_logger')
 
 def info(msg):
     print msg
-    logger.info(msg)
+    xlogger.info(msg)
+    need_to_send.append(msg)
 
 def warning(msg):
     print msg
-    logger.warning(msg)
+    xlogger.warning(msg)
+    need_to_send.append(msg)
+
 
 def error(msg):
     print msg
-    logger.error(msg)
+    xlogger.error(msg)
+    need_to_send.append(msg)
+
 
 if __name__ == '__main__':
     info('info message')

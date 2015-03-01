@@ -1,13 +1,12 @@
-import config
 import sys
 sys.path.append('..')
-from infra import log
+
 from spiders import *
 from infra.items import *
 from infra.misc import *
-from infra.data import *
-
-toutiao = Database(config.user, config.password, config.host, config.database)
+from infra.mails import send_mail
+from infra.data import toutiao
+import infra.xlog as log
 
 log.info('-'*10 + 'crawler start' + '-'*10)
 last_date = toutiao.get_last_date()
@@ -40,9 +39,10 @@ for d in period:
 
     else:
         log.warning('url <{}> can not be accessed'.format(ttprev_url))
-        daily = Daily(d, -1, None)
+        daily = Daily(d, -1, None) #-1 stands for 'fail to obtain'
         toutiao.add_daily(daily)
         log.info(daily)
         toutiao.commit()
 
+send_mail()
 log.info('-'*10 + 'crawler finishs' + '-'*10)

@@ -3,4 +3,4 @@ from wtforms import TextField
 from wtforms.validators import Required
 
 class SearchForm(Form):
-	search_content = TextField('search', validators = [Required()])
+    search_content = TextField('search', validators = [Required()])

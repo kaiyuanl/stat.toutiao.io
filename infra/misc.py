@@ -7,7 +7,7 @@ def get_today_date():
 def get_days(start, end):
     start = start + datetime.timedelta(days = 1)
     diff = end - start
-    for i in range(diff.days + 1):
+    for i in xrange(diff.days + 1):
         yield start + datetime.timedelta(i)
 
 def process_str(raw_str):
@@ -20,4 +20,4 @@ if __name__ == '__main__':
     dt = datetime.date(2015, 1, 10)
     period = get_days(dt, get_today_date())
     for d in period:
-        print d
+        print type(d)

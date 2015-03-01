@@ -1,3 +1,5 @@
 Flask
 Flask-WTF
+MySQL-python
 SQLAlchemy
+
