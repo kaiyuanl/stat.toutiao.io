@@ -1,6 +1,9 @@
 DROP DATABASE IF EXISTS toutiao;
 
-CREATE DATABASE IF NOT EXISTS toutiao;
+CREATE DATABASE toutiao
+    DEFAULT CHARACTER SET utf8
+    DEFAULT COLLATE utf8_general_ci;
+
 USE toutiao;
 
 
